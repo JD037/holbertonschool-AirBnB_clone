@@ -57,5 +57,33 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(hasattr(self.bm, "updated_at"))
         self.assertIsInstance(self.bm.updated_at, datetime)
 
+    def test_init_with_kwargs(self):
+        """ Test instantiation with kwargs """
+        bm_json = self.bm.to_dict()
+        bm2 = BaseModel(**bm_json)
+        self.assertEqual(bm2.id, self.bm.id)
+        self.assertEqual(bm2.created_at, self.bm.created_at)
+        self.assertEqual(bm2.updated_at, self.bm.updated_at)
+        self.assertEqual(bm2.__class__.__name__, self.bm.__class__.__name__)
+        self.assertIsNot(bm2, self.bm)
+
+    def test_created_at_str_to_datetime(self):
+        """ Test that created_at is converted from str to datetime """
+        bm_json = self.bm.to_dict()
+        bm2 = BaseModel(**bm_json)
+        self.assertIsInstance(bm2.created_at, datetime)
+
+    def test_updated_at_str_to_datetime(self):
+        """ Test that updated_at is converted from str to datetime """
+        bm_json = self.bm.to_dict()
+        bm2 = BaseModel(**bm_json)
+        self.assertIsInstance(bm2.updated_at, datetime)
+
+    def test_ignore_class(self):
+        """ Test that __class__ is not set as an attribute from kwargs """
+        bm_json = self.bm.to_dict()
+        bm2 = BaseModel(**bm_json)
+        self.assertNotIn('__class__', bm2.__dict__)
+
 if __name__ == "__main__":
     unittest.main()
