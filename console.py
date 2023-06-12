@@ -1,9 +1,12 @@
 #!/usr/bin/env python3
-"""Console module"""
+"""Entry point for the Console module"""
+
 import cmd
-from models import storage
+import json
 from models.base_model import BaseModel
+from models import storage
 # import all our models here
+
 
 class HBNBCommand(cmd.Cmd):
     """HBNB console"""

@@ -23,6 +23,16 @@ class FileStorage:
 
     __file_path = "file.json"
     __objects = {}
+    # Add a class dictionary to map class names to classes
+    __class_dict = {
+        'BaseModel': BaseModel,
+        'User': User,
+        'State': State,
+        'City': City,
+        'Amenity': Amenity,
+        'Place': Place,
+        'Review': Review
+    }
 
     def all(self):
         """
@@ -54,6 +64,8 @@ class FileStorage:
         try:
             with open(self.__file_path, encoding="utf-8") as f:
                 for obj in json.load(f).values():
-                    self.new(eval(obj["__class__"])(**obj))
+                    # Look up the class in the class dictionary instead of using eval
+                    self.new(self.__class_dict[obj["__class__"]](**obj))
         except FileNotFoundError:
             return
+        
