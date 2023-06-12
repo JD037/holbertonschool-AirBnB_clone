@@ -85,5 +85,11 @@ class TestBaseModel(unittest.TestCase):
         bm2 = BaseModel(**bm_json)
         self.assertNotIn('__class__', bm2.__dict__)
 
+    def test_save_method(self):
+        """ Test save method """
+        old_datetime = self.bm.updated_at
+        self.bm.save()
+        self.assertNotEqual(old_datetime, self.bm.updated_at)
+
 if __name__ == "__main__":
     unittest.main()
