@@ -1,18 +1,9 @@
 #!/usr/bin/python3
-"""
-Contains the FileStorage class model
+"""Contains the FileStorage class model"""
 
-
-"""
 import json
-
+from os import path
 from models.base_model import BaseModel
-from models.user import User
-from models.state import State
-from models.amenity import Amenity
-from models.city import City
-from models.place import Place
-from models.review import Review
 
 
 class FileStorage:
@@ -25,35 +16,28 @@ class FileStorage:
     __objects = {}
 
     def all(self):
-        """
-        Returns the dictionary __objects
-        """
+        """ Returns the dictionary of objects """
         return self.__objects
 
     def new(self, obj):
-        """
-        sets in __objects the `obj` with key <obj class name>.id
-        """
-        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        """ Adds a new object to the dictionary of objects """
+        key = obj.__class__.__name__ + '.' + obj.id
+        self.__objects[key] = obj
 
     def save(self):
-        """
-        Serialize __objects to the JSON file
-        """
-        with open(self.__file_path, mode="w") as f:
-            dict_storage = {}
-            for k, v in self.__objects.items():
-                dict_storage[k] = v.to_dict()
-            json.dump(dict_storage, f)
+        """ Serializes the objects to the JSON file """
+        serialized_objects = {k: v.to_dict() for k, v in self.__objects.items()}
+        
+        with open(self.__file_path, 'w') as f:
+            json.dump(serialized_objects, f)
 
     def reload(self):
-        """
-        Deserializes the JSON file to __objects
-        -> Only IF it exists!
-        """
-        try:
-            with open(self.__file_path, encoding="utf-8") as f:
-                for obj in json.load(f).values():
-                    self.new(eval(obj["__class__"])(**obj))
-        except FileNotFoundError:
-            return
+        """ Deserializes the JSON file to objects, if file exists """
+        if path.exists(self.__file_path):
+            with open(self.__file_path, 'r') as f:
+                objects = json.load(f)
+                
+            for key in objects:
+                class_name = objects[key]["__class__"]
+                if class_name == "BaseModel":
+                    self.__objects[key] = BaseModel(**objects[key])
