@@ -3,6 +3,7 @@
 
 from models.base_model import BaseModel
 
+
 class City(BaseModel):
     """
     City class inherits from BaseModel
@@ -11,6 +12,9 @@ class City(BaseModel):
         state_id (str): Will be the State.id
         name (str): Name of the city
     """
+
+    name = ""
+    state_id = ""
 
     def __init__(self, *args, **kwargs):
         """
@@ -21,6 +25,4 @@ class City(BaseModel):
             **kwargs (dict): Arbitrary keyworded variable length arguments
         """
         super().__init__(*args, **kwargs)
-        self.state_id = ""
-        self.name = ""
         

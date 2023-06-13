@@ -12,7 +12,10 @@ class Review(BaseModel):
         user_id (str): Will be the User.id
         text (str): Review text
     """
-
+    place_id = ""
+    user_id = ""
+    text = ""
+    
     def __init__(self, *args, **kwargs):
         """
         Initialize Review instance
@@ -22,7 +25,3 @@ class Review(BaseModel):
             **kwargs (dict): Arbitrary keyworded variable length arguments
         """
         super().__init__(*args, **kwargs)
-        self.place_id = ""
-        self.user_id = ""
-        self.text = ""
-        
