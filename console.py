@@ -4,9 +4,9 @@
 import cmd
 import json
 from models.base_model import BaseModel
+from models.user import User
 from models import storage
 # import all our models here
-
 
 class HBNBCommand(cmd.Cmd):
     """HBNB console"""
@@ -26,16 +26,17 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it and prints the id"""
+        class_dict = {"BaseModel": BaseModel, "User": User}
         if len(arg) == 0:
             print("** class name missing **")
         else:
             try:
-                new_model = eval(arg)()
+                new_model = class_dict[arg]()
                 new_model.save()
                 print(new_model.id)
-            except NameError:
+            except KeyError:
                 print("** class doesn't exist **")
-    
+
     def do_show(self, arg):
         """Prints the string representation of an instance based on the class name and id."""
         args = arg.split()

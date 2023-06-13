@@ -5,7 +5,7 @@ Contains the FileStorage class model
 
 """
 import json
-
+import models
 from models.base_model import BaseModel
 from models.user import User
 from models.state import State
@@ -41,31 +41,22 @@ class FileStorage:
         return self.__objects
 
     def new(self, obj):
-        """
-        sets in __objects the `obj` with key <obj class name>.id
-        """
-        self.__objects["{}.{}".format(obj.__class__.__name__, obj.id)] = obj
+        """Set in __objects the obj with key <obj class name>.id"""
+        key = obj.__class__.__name__ + '.' + obj.id
+        self.__objects[key] = obj
 
     def save(self):
-        """
-        Serialize __objects to the JSON file
-        """
-        with open(self.__file_path, mode="w") as f:
-            dict_storage = {}
-            for k, v in self.__objects.items():
-                dict_storage[k] = v.to_dict()
-            json.dump(dict_storage, f)
+        """Serialize __objects to the JSON file (path: __file_path)"""
+        with open(self.__file_path, 'w') as f:
+            json.dump({k: v.to_dict() for k, v in self.__objects.items()}, f)
 
     def reload(self):
-        """
-        Deserializes the JSON file to __objects
-        -> Only IF it exists!
-        """
+        """Deserialize the JSON file to __objects"""
         try:
-            with open(self.__file_path, encoding="utf-8") as f:
-                for obj in json.load(f).values():
-                    # Look up the class in the class dictionary instead of using eval
-                    self.new(self.__class_dict[obj["__class__"]](**obj))
+            with open(self.__file_path, 'r') as f:
+                objs = json.load(f)
+            for k, v in objs.items():
+                cls = getattr(models, v['__class__'])
+                self.new(cls(**v))
         except FileNotFoundError:
-            return
-        
+            pass
