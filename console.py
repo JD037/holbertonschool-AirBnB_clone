@@ -6,7 +6,12 @@ import json
 from models.base_model import BaseModel
 from models.user import User
 from models import storage
-# import all our models here
+from models.city import City
+from models.place import Place
+from models.review import Review
+from models.state import State
+from models.amenity import Amenity
+
 
 class HBNBCommand(cmd.Cmd):
     """HBNB console"""
@@ -26,7 +31,7 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it and prints the id"""
-        class_dict = {"BaseModel": BaseModel, "User": User}
+        class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity, "City": City, "Place": Place, "Review": Review, "State": State}
         if len(arg) == 0:
             print("** class name missing **")
         else:
@@ -38,10 +43,14 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_show(self, arg):
-        """Prints the string representation of an instance based on the class name and id."""
+        """Prints the string representation of an instance based on
+        the class name and id."""
         args = arg.split()
+        class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity, "City": City, "Place": Place, "Review": Review, "State": State}
         if len(args) == 0:
             print("** class name missing **")
+        elif args[0] not in class_dict:
+            print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
         else:
@@ -52,10 +61,14 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_destroy(self, arg):
-        """Deletes an instance based on the class name and id (save the change into the JSON file)."""
+        """Deletes an instance based on the class
+        name and id (save the change into the JSON file)."""
+        class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity, "City": City, "Place": Place, "Review": Review, "State": State}
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
+        elif args[0] not in class_dict:
+            print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
         else:
@@ -78,10 +91,15 @@ class HBNBCommand(cmd.Cmd):
                 print("** class doesn't exist **")
 
     def do_update(self, arg):
-        """Updates an instance based on the class name and id by adding or updating attribute (save the change into the JSON file)."""
+        """Updates an instance based on the class name and id by
+        adding or updating attribute
+        (save the change into the JSON file)."""
+        class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity, "City": City, "Place": Place, "Review": Review, "State": State}
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
+        elif args[0] not in class_dict:
+            print("** class doesn't exist **")
         elif len(args) == 1:
             print("** instance id missing **")
         elif len(args) == 2:
