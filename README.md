@@ -2,6 +2,8 @@
 
 This is a project to create a clone of AirBnB. The first step of this project is to build a command interpreter to manage our AirBnB objects, which include aspects such as Users, Places, Reviews etc.
 
+Running the tests
+(Information about how to run the unit tests for the project. This could include a command to run, what to expect, ect.)
 ## Getting Started
 
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes.
@@ -48,4 +50,3 @@ Example:
 
     Kolton Rhodes
     Josh Davis
-testing 123
