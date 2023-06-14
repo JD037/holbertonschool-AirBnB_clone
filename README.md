@@ -16,8 +16,13 @@ Clone this repository to your machine:
 git clone https://<GitToken>@github.com/JD037/holbertonschool-AirBnB_clone.git
 
 ## Command Interpreter
-
 The command interpreter is a shell-like command-line interface where you can manipulate and manage your AirBnB objects.
+
+Advantages of JSON:
+It stores all the data in an array so that data transfer makes easier. 
+
+
+
 
 ### How to start it
 To start the command interpreter, navigate to the root directory of the repository and run:
