@@ -22,7 +22,7 @@ Advantages of JSON:
 It stores all the data in an array so that data transfer makes easier. 
 Its syntax is very small, easy, and light-weighted that’s the reason it executes and responds in a faster way.
 It has a wide range for browser support compatibility with the operating systems.
-
+On the server-side parsing is the most important part that developers want.
 
 ### How to start it
 To start the command interpreter, navigate to the root directory of the repository and run:
