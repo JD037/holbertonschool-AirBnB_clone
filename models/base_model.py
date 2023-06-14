@@ -7,11 +7,11 @@ from datetime import datetime
 
 class BaseModel:
     """ BaseModel class for all the other classes """
-    
+
     def __init__(self, *args, **kwargs):
-        """ 
+        """
         Instantiate BaseModel with id, created_at, and updated_at.
-        If available, kwargs should be used for instantiation. 
+        If available, kwargs should be used for instantiation.
         """
         if kwargs:
             for key, value in kwargs.items():
@@ -25,14 +25,15 @@ class BaseModel:
 
     def __str__(self):
         """ Provide an informal representation of BaseModel instances """
-        return "[{}] ({}) {}".format(self.__class__.__name__, self.id, self.__dict__)
+        return "[{}] ({}) {}".format(
+            self.__class__.__name__, self.id, self.__dict__)
 
     def save(self):
         """ Update the instance's updated_at attribute """
         from models import storage
         self.updated_at = datetime.now()
         storage.new(self)
-        storage.save() 
+        storage.save()
 
     def to_dict(self):
         """ Return dictionary of instance attributes, including class name """

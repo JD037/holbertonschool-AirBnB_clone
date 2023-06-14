@@ -5,6 +5,7 @@ This module defines the State class.
 
 from models.base_model import BaseModel
 
+
 class State(BaseModel):
     """
     State class for AirBnB clone.
@@ -16,4 +17,3 @@ class State(BaseModel):
         Initialize a State instance.
         """
         super().__init__(*args, **kwargs)
-        

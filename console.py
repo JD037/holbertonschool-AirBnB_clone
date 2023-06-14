@@ -31,7 +31,15 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, arg):
         """Creates a new instance of BaseModel, saves it and prints the id"""
-        class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity, "City": City, "Place": Place, "Review": Review, "State": State}
+        class_dict = {
+            "BaseModel": BaseModel,
+            "User": User,
+            "Amenity": Amenity,
+            "City": City,
+            "Place": Place,
+            "Review": Review,
+            "State": State
+        }
         if len(arg) == 0:
             print("** class name missing **")
         else:
@@ -46,7 +54,15 @@ class HBNBCommand(cmd.Cmd):
         """Prints the string representation of an instance based on
         the class name and id."""
         args = arg.split()
-        class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity, "City": City, "Place": Place, "Review": Review, "State": State}
+        class_dict = {
+            "BaseModel": BaseModel,
+            "User": User,
+            "Amenity": Amenity,
+            "City": City,
+            "Place": Place,
+            "Review": Review,
+            "State": State
+        }
         if len(args) == 0:
             print("** class name missing **")
         elif args[0] not in class_dict:
@@ -63,7 +79,15 @@ class HBNBCommand(cmd.Cmd):
     def do_destroy(self, arg):
         """Deletes an instance based on the class
         name and id (save the change into the JSON file)."""
-        class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity, "City": City, "Place": Place, "Review": Review, "State": State}
+        class_dict = {
+            "BaseModel": BaseModel,
+            "User": User,
+            "Amenity": Amenity,
+            "City": City,
+            "Place": Place,
+            "Review": Review,
+            "State": State
+        }
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -80,13 +104,29 @@ class HBNBCommand(cmd.Cmd):
                 print("** no instance found **")
 
     def do_all(self, arg):
-        """Prints all string representation of all instances based or not on the class name."""
+        """Prints all string representation of all instances
+        based or not on the class name.
+        """
         args = arg.split()
+
         if len(args) == 0:
             print([str(v) for v in storage.all().values()])
         else:
-            if args[0] in ["BaseModel", "User", "Place", "State", "City", "Amenity", "Review"]:
-                print([str(v) for k, v in storage.all().items() if k.split(".")[0] == args[0]])
+            if args[0] in [
+                "BaseModel",
+                "User",
+                "Place",
+                "State",
+                "City",
+                "Amenity",
+                "Review"
+            ]:
+
+                print([
+                    str(v) for k, v in storage.all().items()
+                    if k.split(".")[0] == args[0]
+                ])
+
             else:
                 print("** class doesn't exist **")
 
@@ -94,7 +134,15 @@ class HBNBCommand(cmd.Cmd):
         """Updates an instance based on the class name and id by
         adding or updating attribute
         (save the change into the JSON file)."""
-        class_dict = {"BaseModel": BaseModel, "User": User, "Amenity": Amenity, "City": City, "Place": Place, "Review": Review, "State": State}
+        class_dict = {
+            "BaseModel": BaseModel,
+            "User": User,
+            "Amenity": Amenity,
+            "City": City,
+            "Place": Place,
+            "Review": Review,
+            "State": State
+        }
         args = arg.split()
         if len(args) == 0:
             print("** class name missing **")
@@ -113,6 +161,7 @@ class HBNBCommand(cmd.Cmd):
                 storage.all()[key].save()
             else:
                 print("** no instance found **")
+
 
 if __name__ == '__main__':
     HBNBCommand().cmdloop()

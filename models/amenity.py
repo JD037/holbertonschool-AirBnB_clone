@@ -12,7 +12,7 @@ class Amenity(BaseModel):
         name (str): Name of the amenity. It's an empty string by default.
     """
     name = ""
-    
+
     def __init__(self, *args, **kwargs):
         """
         Initialize Amenity instance
@@ -22,4 +22,3 @@ class Amenity(BaseModel):
             **kwargs (dict): Arbitrary keyworded variable length arguments
         """
         super().__init__(*args, **kwargs)
-        

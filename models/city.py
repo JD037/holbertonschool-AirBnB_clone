@@ -25,4 +25,3 @@ class City(BaseModel):
             **kwargs (dict): Arbitrary keyworded variable length arguments
         """
         super().__init__(*args, **kwargs)
-        
