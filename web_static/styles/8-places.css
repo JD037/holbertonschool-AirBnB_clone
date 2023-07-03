@@ -66,6 +66,26 @@
     width: 100px;
 }
 
+.guest_icon
+{
+    background-image:url("../images/icon_group.png");
+    min-height:100%;
+    background-repeat: no-repeat;
+}
+.room_icon
+{
+    background-image:url("../images/icon_bed.png");
+    min-height:100%;
+    background-repeat: no-repeat;
+}
+.bath_icon
+{
+    background-image:url("../images/icon_bath.png");
+    min-height:100%;
+    background-repeat: no-repeat;
+}
+
+
 /* Styles for user */
 .user {
     padding: 10px 0;
